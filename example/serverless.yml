@@ -1,0 +1,15 @@
+service: my-test-service
+
+plugins:
+  - serverless-restapi-auto-deployer
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: /hello
+          method: GET

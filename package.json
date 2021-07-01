@@ -1,0 +1,26 @@
+{
+  "name": "serverless-restapi-auto-deployer",
+  "version": "1.0.0",
+  "description": "RestApi Auto Deployer",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rm -rf dist && tsc --sourceMap -p ./",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@aws-sdk/client-api-gateway": "^3.20.0",
+    "serverless": "^2.50.0"
+  },
+  "devDependencies": {
+    "serverless-restapi-auto-deployer": "github:AbdullahAli/serverless-restapi-auto-deployer#ts",
+    "typescript": "^4.3.5"
+  },
+  "peerDependencies": {
+    "serverless": "2.x"
+  },
+  "engines": {
+    "node": ">=14 <15"
+  },
+  "license": "MIT"
+}
