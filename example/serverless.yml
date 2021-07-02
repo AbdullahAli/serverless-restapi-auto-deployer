@@ -1,7 +1,7 @@
 service: my-test-service
 
 plugins:
-  - serverless-apigateway-auto-deployer
+  - serverless-restapi-automatic-deployment
 
 provider:
   name: aws

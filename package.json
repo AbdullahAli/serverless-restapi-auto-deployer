@@ -1,7 +1,7 @@
 {
-  "name": "serverless-apigateway-auto-deployer",
+  "name": "serverless-restapi-automatic-deployment",
   "version": "1.0.0",
-  "description": "APIGateway Auto Deployer",
+  "description": "RestAPI Automatic Deployment",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
