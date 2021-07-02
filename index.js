@@ -11,31 +11,35 @@ class ServerlessPlugin {
     };
   }
 
-  async postDeploy() {
+  postDeploy() {
     const stageName =
       this.serverless.variables.options.stage ||
       this.serverless.service.defaults.stage;
 
     this.serverless.cli.log('STARTING_DEPLOY', this.pluginName);
 
-    const {
-      items: [{ id: restApiId }],
-    } = await this.provider.request('APIGateway', 'getRestApis');
+    console.log(this.serverless.service);
 
-    this.serverless.cli.log(
-      `DEPLOY_IN_PROGRESS - { restApiId: ${restApiId}, stageName: ${stageName} }`,
-      this.pluginName,
-      { color: 'green' }
-    );
+    // const restApis = await this.provider.request('APIGateway', 'getRestApis');
 
-    await this.provider.request('APIGateway', 'createDeployment', {
-      restApiId,
-      stageName,
-    });
+    // return this.provider
+    //   .request('APIGateway', 'getRestApis')
+    //   .then(({ items: restApis }) => restApis.filter(restApi => restApi.name === ));
 
-    this.serverless.cli.log('DEPLOY_COMPLETE', this.pluginName, {
-      color: 'green',
-    });
+    // this.serverless.cli.log(
+    //   `DEPLOY_IN_PROGRESS - { restApiId: ${restApiId}, stageName: ${stageName} }`,
+    //   this.pluginName,
+    //   { color: 'green' }
+    // );
+
+    // await this.provider.request('APIGateway', 'createDeployment', {
+    //   restApiId,
+    //   stageName,
+    // });
+
+    // this.serverless.cli.log('DEPLOY_COMPLETE', this.pluginName, {
+    //   color: 'green',
+    // });
   }
 }
 
