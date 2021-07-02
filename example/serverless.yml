@@ -1,7 +1,7 @@
 service: my-test-service
 
 plugins:
-  - serverless-restapi-automatic-deployment
+  - serverless-restapi-auto-deployer
 
 provider:
   name: aws
