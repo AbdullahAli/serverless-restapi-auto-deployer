@@ -1,5 +1,5 @@
 {
-  "name": "serverless-restapi-auto-deployer",
+  "name": "serverless-restapi-auto-deployer-x",
   "version": "1.0.0",
   "description": "RestApi Auto Deployer",
   "main": "dist/index.js",

@@ -14,18 +14,12 @@ class ServerlessRestapiAutoDeployer implements Plugin {
   }
 
   async postDeploy() {
-    const region = this.serverless.getProvider('aws').getRegion();
-    const stageName = this.serverless.getProvider('aws').getStage();
-    const restApiName =
-      this.serverless.service.provider.compiledCloudFormationTemplate.Resources
-        .ApiGatewayRestApi.Properties.Name;
-    const restApiId = await getRestApiId(restApiName, region);
+    const provider = this.serverless.getProvider('aws');
+    const region = provider.getRegion();
+    const stageName = provider.getStage();
+    const restApiName = provider.naming.getApiGatewayName();
 
-    if (!restApiId) {
-      throw new Error(
-        `NO_RESTAPI_FOUND - ${JSON.stringify({ restApiName, region })}`
-      );
-    }
+    const restApiId = await getRestApiId(restApiName, region);
 
     this.serverless.cli.log(
       `DEPLOY_IN_PROGRESS - ${JSON.stringify(

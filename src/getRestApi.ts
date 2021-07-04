@@ -7,7 +7,11 @@ export const getRestApiId = async (restApiName: string, region: string) => {
   );
 
   for await (const { items: restApis } of paginator) {
-    const restApi = restApis?.find(({ name }) => name === restApiName);
-    if (restApi) return restApi.id;
+    const restApiId = restApis?.find(({ name }) => name === restApiName)?.id;
+    if (restApiId) return restApiId;
   }
+
+  throw new Error(
+    `NO_RESTAPI_FOUND - ${JSON.stringify({ restApiName, region })}`
+  );
 };
