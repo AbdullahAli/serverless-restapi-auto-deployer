@@ -1,5 +1,5 @@
 {
-  "name": "serverless-restapi-auto-deployer-x",
+  "name": "serverless-restapi-auto-deployer",
   "version": "1.0.0",
   "description": "RestApi Auto Deployer",
   "main": "dist/index.js",
@@ -13,11 +13,10 @@
     "serverless": "^2.50.0"
   },
   "devDependencies": {
-    "serverless-restapi-auto-deployer": "github:AbdullahAli/serverless-restapi-auto-deployer#ts",
     "typescript": "^4.3.5"
   },
   "peerDependencies": {
-    "serverless": "2.x"
+    "serverless": "2.50.0"
   },
   "engines": {
     "node": ">=14 <15"

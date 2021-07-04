@@ -6,12 +6,15 @@ export const getRestApiId = async (restApiName: string, region: string) => {
     { limit: 500 }
   );
 
-  for await (const { items: restApis } of paginator) {
-    const restApiId = restApis?.find(({ name }) => name === restApiName)?.id;
+  for await (const page of paginator) {
+    const restApiId = page.items?.find(({ name }) => name === restApiName)?.id;
     if (restApiId) return restApiId;
   }
 
   throw new Error(
-    `NO_RESTAPI_FOUND - ${JSON.stringify({ restApiName, region })}`
+    `[RestApi Auto Deployer]: No RestApi found - ${JSON.stringify({
+      restApiName,
+      region,
+    })}`
   );
 };

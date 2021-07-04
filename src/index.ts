@@ -1,6 +1,5 @@
 import Serverless from 'serverless';
 import Plugin from 'serverless/classes/Plugin';
-import { description as pluginEntity } from '../package.json';
 import { getRestApiId } from './getRestApi';
 import { deployRestApi } from './deployRestApi';
 
@@ -10,10 +9,10 @@ class ServerlessRestapiAutoDeployer implements Plugin {
 
   constructor(serverless: Serverless) {
     this.serverless = serverless;
-    this.hooks = { 'after:deploy:deploy': this.postDeploy.bind(this) };
+    this.hooks = { 'after:deploy:deploy': this.postDeploy };
   }
 
-  async postDeploy() {
+  postDeploy = async () => {
     const provider = this.serverless.getProvider('aws');
     const region = provider.getRegion();
     const stageName = provider.getStage();
@@ -22,27 +21,15 @@ class ServerlessRestapiAutoDeployer implements Plugin {
     const restApiId = await getRestApiId(restApiName, region);
 
     this.serverless.cli.log(
-      `DEPLOY_IN_PROGRESS - ${JSON.stringify(
-        {
-          restApiId,
-          stageName,
-          restApiName,
-        },
-        null,
-        4
-      )}`,
-      // @ts-ignore - Serverless plugin has incorrect interfaces
-      pluginEntity,
-      { color: 'green' }
+      `[RestApi Auto Deployer]: starting deploy ${JSON.stringify({
+        restApiId,
+        stageName,
+        restApiName,
+      })}`
     );
-
     await deployRestApi(restApiId, stageName, region);
-
-    //@ts-ignore - Serverless plugin has incorrect interfaces
-    this.serverless.cli.log('DEPLOY_COMPLETE', pluginEntity, {
-      color: 'green',
-    });
-  }
+    this.serverless.cli.log('[RestApi Auto Deployer]: deploy complete');
+  };
 }
 
 module.exports = ServerlessRestapiAutoDeployer;
